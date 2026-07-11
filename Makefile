@@ -3,7 +3,6 @@ CFLAGS = -Wall -Wextra
 
 SRCS = \
 thirdparty/glad/src/glad.c \
-src/entity/*.c \
 src/game/*.c \
 src/render/*.c
 
@@ -12,7 +11,6 @@ INCLUDES = \
 -Ithirdparty/cglm/include \
 -Ithirdparty/glad/include \
 -Ithirdparty/stb/include \
--Isrc/entity \
 -Isrc/game \
 -Isrc/render
 

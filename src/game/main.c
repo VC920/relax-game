@@ -4,15 +4,12 @@
 #include <stb_ds.h>
 #include <SDL2/SDL.h>
 #include <glad/glad.h>
-#include "loader.h"
 #include "game.h"
 #include "renderer.h"
 
 // Settings
-const int WINDOW_WIDTH = 1920;
-const int WINDOW_HEIGHT = 1080;
-
-extern Entity entities[512];
+int WINDOW_WIDTH = 1920;
+int WINDOW_HEIGHT = 1080;
 
 int main()
 {
@@ -26,7 +23,7 @@ int main()
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
     SDL_Window *window = SDL_CreateWindow("", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 
-        WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_OPENGL);
+        WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN_DESKTOP);
     if (window == NULL) {
         fprintf(stderr, "SDL_CreateWindow Error: %s\n", SDL_GetError());
         return 1;
@@ -38,11 +35,12 @@ int main()
         fprintf(stderr, "SDL_GL_GetProcAddress Error");
     }
 
+    // Setting
+    SDL_ShowCursor(SDL_DISABLE);
+    SDL_SetRelativeMouseMode(SDL_TRUE);
+
     // Setup
     game_init();
-
-    Shader shader = load_shader("assets/shader/shader.vert", "assets/shader/shader.frag");
-    renderer_init(&shader);
 
     Uint64 last_frame_time = SDL_GetPerformanceCounter();
     Uint64 frequency = SDL_GetPerformanceFrequency();
@@ -64,6 +62,16 @@ int main()
             case SDL_KEYUP: 
                 game_key_up(event.key.keysym.sym);
                 break;
+            case SDL_MOUSEMOTION:
+                game_mouse_relative_pos(event.motion.xrel, event.motion.yrel);
+                break;
+            case SDL_WINDOWEVENT:
+                if (event.window.event == SDL_WINDOWEVENT_RESIZED) {
+                    WINDOW_WIDTH = event.window.data1;
+                    WINDOW_HEIGHT = event.window.data2;
+                    glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
+                }
+                break;
             default:
                 break;
             }
@@ -73,16 +81,10 @@ int main()
         Uint64 current_frame_time = SDL_GetPerformanceCounter();
         float delta_time = (float)(current_frame_time - last_frame_time) / frequency;
         last_frame_time = current_frame_time;
-        // printf("Current FPS: %.f\n", 1 / delta_time);
+        printf("Current FPS: %.f\n", 1 / delta_time);
 
         game_update(delta_time);
-
-        // Render
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        for (int i = 0; i < (int)(sizeof(entities) / sizeof(*entities)); i++) {
-            renderer_render(&entities[i]);
-        }
-
+        
         SDL_GL_SwapWindow(window);
     }
 
