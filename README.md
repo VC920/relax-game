@@ -1,6 +1,8 @@
 # Relax Render
 a little pure c program 3d game
 
+![demo1](./assets/texture/demo1.png)
+
 # Build
 make && make run
 

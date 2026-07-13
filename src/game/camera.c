@@ -28,9 +28,9 @@ void camera_update(Camera *camera, int mouse_xrel, int mouse_yrel, float dt)
 
     camera->front[0] = cos(glm_rad(camera->pitch)) * sin(glm_rad(camera->yaw));
     camera->front[1] = sin(glm_rad(camera->pitch));
-    camera->front[2] = -cos(glm_rad(camera->pitch)) * cos(glm_rad(camera->yaw));
-
-    glm_vec3_add(camera->position, camera->front, camera->target);
+    camera->front[2] = cos(glm_rad(camera->pitch)) * -cos(glm_rad(camera->yaw));
+    glm_vec3_normalize(camera->front);
+    
     glm_vec3_cross(camera->front, camera->up, camera->right);
     glm_vec3_normalize(camera->right);
 
@@ -54,4 +54,6 @@ void camera_update(Camera *camera, int mouse_xrel, int mouse_yrel, float dt)
     }
 
     camera->position[1] = 1;
+
+    glm_vec3_add(camera->position, camera->front, camera->target);
 }
