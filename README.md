@@ -17,10 +17,10 @@ cglm
 kenney
 
 ## Func
-1.model render
-2.map load
-3.fps cmaera
-4.phong lighting
+1.model render  
+2.map load  
+3.fps cmaera  
+4.phong lighting  
 
 ## 一个大概的流程
 0.平台，api，游戏分离  
@@ -28,5 +28,5 @@ kenney
 2.解析obj，绘制一个模型  
 3.封装一个实体，包含模型，pos，rot，scale（为地图服务）  
 4.解析地图，加载实体数组  
-5.camera，第一人称可以升降的相机
-6.phong氏光照
+5.camera，第一人称可以升降的相机  
+6.phong氏光照  
