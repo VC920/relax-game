@@ -7,7 +7,8 @@ cube assets/model/tree.obj assets/model/tree.png 0.0/0.0/-2.0 0.0/0.0/0.0 1.0
 cube assets/model/tree.obj assets/model/tree.png -2.0/0.0/-2.0 0.0/0.0/0.0 1.0
 cube assets/model/tree.obj assets/model/tree.png -2.0/0.0/0.0 0.0/0.0/0.0 1.0
 cube assets/model/tree.obj assets/model/tree.png -2.0/0.0/2.0 0.0/0.0/0.0 1.0
-building assets/model/building.obj assets/model/building.png -5.0/0.0/5.0 0.0/0.0/0.0 1.0
+duck_toy assets/model/duck_toy.obj assets/model/duck_toy.jpg -5.0/0.0/5.0 0.0/0.0/0.0 10.0
+duck_toy assets/model/barrel.obj assets/model/barrel_diff.jpg 5.0/0.0/5.0 0.0/0.0/0.0 1.0
 building assets/model/building.obj assets/model/building.png 0.0/0.0/-20.0 0.0/180.0/0.0 5.0
 building assets/model/building.obj assets/model/building.png 10.0/0.0/-10.0 0.0/90.0/0.0 5.0
 building assets/model/building.obj assets/model/building.png -10.0/0.0/-10.0 0.0/270.0/0.0 5.0

@@ -8,8 +8,8 @@
 #include "renderer.h"
 
 // Settings
-int WINDOW_WIDTH = 1920;
-int WINDOW_HEIGHT = 1080;
+int WINDOW_WIDTH = 1280;
+int WINDOW_HEIGHT = 720;
 
 int main()
 {
@@ -21,9 +21,10 @@ int main()
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 6);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 
     SDL_Window *window = SDL_CreateWindow("", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 
-        WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN_DESKTOP);
+        WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_OPENGL );
     if (window == NULL) {
         fprintf(stderr, "SDL_CreateWindow Error: %s\n", SDL_GetError());
         return 1;
@@ -57,6 +58,9 @@ int main()
                 running = false;
                 break;
             case SDL_KEYDOWN: 
+                if (event.key.repeat == 0) {
+                    game_key_pressed(event.key.keysym.sym);
+                }
                 game_key_down(event.key.keysym.sym);
                 break;
             case SDL_KEYUP: 
@@ -81,13 +85,13 @@ int main()
         Uint64 current_frame_time = SDL_GetPerformanceCounter();
         float delta_time = (float)(current_frame_time - last_frame_time) / frequency;
         last_frame_time = current_frame_time;
-        // printf("Current FPS: %.f\n", 1 / delta_time);
+        /* printf("Current FPS: %.f\n", 1 / delta_time); */
 
         game_update(delta_time);
         
         SDL_GL_SwapWindow(window);
     }
 
-    SDL_Quit();
+     SDL_Quit();
     return 0;
 }

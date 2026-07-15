@@ -1,0 +1,6 @@
+plane assets/model/plane.obj NULL 0.0/0.0/0.0 0.0/0.0/0.0 1.0
+cube assets/model/cube.obj NULL 0.0/0.0/0.0 45.0/0.0/0.0 1.0
+cube assets/model/cube.obj NULL 10.0/0.0/0.0 0.0/45.0/0.0 1.0
+cube assets/model/cube.obj NULL 0.0/0.0/10.0 0.0/0.0/0.0 1.0
+cube assets/model/cube.obj NULL 0.0/10.0/0.0 0.0/0.0/45.0 1.0
+cube assets/model/cube.obj NULL 10.0/10.0/10.0 45.0/45.0/0.0 1.0

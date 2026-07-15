@@ -10,14 +10,25 @@ Camera camera_init(vec3 position, float speed, float sensitivity)
     camera.sensitivity = sensitivity;
     camera.pitch = 0;
     camera.yaw = 0;
+
+    camera.mouse_xrel = 0;
+    camera.mouse_yrel = 0;
+
+    camera.move_back = false;
+    camera.move_front = false;
+    camera.move_left = false;
+    camera.move_right = false;
     return camera;
 }
 
-void camera_update(Camera *camera, int mouse_xrel, int mouse_yrel, float dt)
+void camera_update(Camera *camera, float dt)
 {
     // rot
-    camera->yaw += mouse_xrel * camera->sensitivity;
-    camera->pitch -= mouse_yrel * camera->sensitivity;
+    camera->yaw += camera->mouse_xrel * camera->sensitivity;
+    camera->pitch -= camera->mouse_yrel * camera->sensitivity;
+
+    camera->mouse_xrel = 0;
+    camera->mouse_yrel = 0;
 
     if (camera->pitch > 89.0f) {
         camera->pitch = 89.0f;
@@ -52,8 +63,14 @@ void camera_update(Camera *camera, int mouse_xrel, int mouse_yrel, float dt)
         glm_vec3_scale(camera->right, camera->speed * dt, move_dir); 
         glm_vec3_add(camera->position, move_dir, camera->position);
     }
-
-    camera->position[1] = 1;
+    if (camera->move_up) {
+        glm_vec3_scale(camera->up, -camera->speed * dt, move_dir);
+        glm_vec3_add(camera->position, move_dir, camera->position);
+    }
+    if (camera->move_down) {
+        glm_vec3_scale(camera->up, camera->speed * dt, move_dir); 
+        glm_vec3_add(camera->position, move_dir, camera->position);
+    }
 
     glm_vec3_add(camera->position, camera->front, camera->target);
 }

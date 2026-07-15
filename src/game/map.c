@@ -27,16 +27,19 @@ Entity *map_load_entities(const char *path)
         );
 
         Model model = model_load(model_path);
-        model.texture = texture_load(texture_path);
+        if (strcmp(texture_path, "NULL") != 0) {
+            model.texture = texture_load(texture_path);
+        }
 
         entity.model = model;
         arrpush(entities, entity);
 
-        printf("\n\nentity name: %s\n", entity_name);
-        printf("entity model path: %s\n", model_path);
-        printf("entity texture path: %s\n", texture_path);
-        printf("entity position: %f, %f, %f\n", entity.position[0], entity.position[1], entity.position[2]);
-        printf("entity rotation: %f, %f, %f\n", entity.rotation[0], entity.rotation[1], entity.rotation[2]);
+        // Log
+        // printf("\n\nentity name: %s\n", entity_name);
+        // printf("entity model path: %s\n", model_path);
+        // printf("entity texture path: %s\n", texture_path);
+        // printf("entity position: %f, %f, %f\n", entity.position[0], entity.position[1], entity.position[2]);
+        // printf("entity rotation: %f, %f, %f\n", entity.rotation[0], entity.rotation[1], entity.rotation[2]);
     }
 
     fclose(file);
