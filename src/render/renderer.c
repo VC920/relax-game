@@ -78,9 +78,13 @@ void renderer_render(Shader *shader, Entity *light, Entity *entity, Camera *came
     glUniform3f(glGetUniformLocation(shader->program_id, "light_pos"), light->position[0], light->position[1], light->position[2]);
     glUniform3f(glGetUniformLocation(shader->program_id, "view_pos"), camera->position[0], camera->position[1], camera->position[2]);
     
-    // Mesh
+    // Model
     Model model = entity->model;
 
+    Texture texture = model.texture;
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, texture.texture_id);
+    
     Mesh mesh = model.mesh;
     glBindVertexArray(mesh.vao_id);
     glDrawElements(GL_TRIANGLES, mesh.index_count, GL_UNSIGNED_INT, 0);
