@@ -23,7 +23,7 @@ https://polyhaven.com/
 1.model render  
 2.map load  
 3.fps cmaera  
-4.phong lighting
+4.phong lighting  
 5.light map
 
 ## 一个大概的流程

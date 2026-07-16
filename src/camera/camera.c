@@ -14,6 +14,7 @@ Camera camera_init(vec3 position, float speed, float sensitivity)
     camera.mouse_xrel = 0;
     camera.mouse_yrel = 0;
 
+    camera.can_fly = false;
     camera.move_back = false;
     camera.move_front = false;
     camera.move_left = false;
@@ -65,13 +66,19 @@ void camera_update(Camera *camera, float dt)
         glm_vec3_scale(camera->right, camera->speed * dt, move_dir); 
         glm_vec3_add(camera->position, move_dir, camera->position);
     }
-    if (camera->move_up) {
-        glm_vec3_scale(camera->up, -camera->speed * dt, move_dir);
-        glm_vec3_add(camera->position, move_dir, camera->position);
-    }
-    if (camera->move_down) {
-        glm_vec3_scale(camera->up, camera->speed * dt, move_dir); 
-        glm_vec3_add(camera->position, move_dir, camera->position);
+
+    // can fly
+    if (camera->can_fly) {
+	if (camera->move_up) {
+	    glm_vec3_scale(camera->up, -camera->speed * dt, move_dir);
+	    glm_vec3_add(camera->position, move_dir, camera->position);
+	}
+	if (camera->move_down) {
+	    glm_vec3_scale(camera->up, camera->speed * dt, move_dir); 
+	    glm_vec3_add(camera->position, move_dir, camera->position);
+	}
+    } else {
+	camera->position[1] = 1.0f;
     }
 
     glm_vec3_add(camera->position, camera->front, camera->target);

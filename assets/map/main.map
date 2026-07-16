@@ -7,7 +7,7 @@ cube assets/model/tree.obj assets/model/tree.png [0.0/0.0/-2.0] [0.0/0.0/0.0] [1
 cube assets/model/tree.obj assets/model/tree.png [-2.0/0.0/-2.0] [0.0/0.0/0.0] [1.0]
 cube assets/model/tree.obj assets/model/tree.png [-2.0/0.0/0.0] [0.0/0.0/0.0] [1.0]
 cube assets/model/tree.obj assets/model/tree.png [-2.0/0.0/2.0] [0.0/0.0/0.0] [1.0]
-duck_toy assets/model/duck_toy.obj assets/model/duck_toy.jpg [-5.0/0.0/5.0] [0.0/0.0/0.0] [10.0]
+duck_toy assets/model/duck_toy.obj assets/model/duck_toy_diff.jpg [-5.0/0.0/5.0] [0.0/0.0/0.0] [10.0]
 barrel assets/model/barrel.obj assets/model/barrel_diff.jpg [5.0/0.0/5.0] [0.0/0.0/0.0] [1.0]
 barrel assets/model/barrel.obj assets/model/barrel_diff.jpg [5.0/0.0/6.0] [0.0/0.0/0.0] [1.0]
 barrel assets/model/barrel.obj assets/model/barrel_diff.jpg [6.0/0.0/5.0] [0.0/0.0/0.0] [1.0]
@@ -17,3 +17,4 @@ building assets/model/building.obj assets/model/building.png [-10.0/0.0/-10.0] [
 road_slant assets/model/road_slant.obj assets/model/road_slant.png [-10.0/0.0/0.0] [0.0/135.0/0.0] [3.0]
 character assets/model/character.obj assets/model/character.png [-8.0/0.0/-10.0] [0.0/90.0/0.0] [0.5]
 fountain assets/model/fountain.obj assets/model/fountain.png [0.0/0.0/-10.0] [0.0/0.0/0.0] [2.0]
+wooden_picnic_table assets/model/wooden_picnic_table.obj assets/model/wooden_picnic_table_diff.png [5.0/0.0/0.0] [0.0/90.0/0.0] [1.0]

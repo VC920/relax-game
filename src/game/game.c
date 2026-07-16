@@ -57,9 +57,10 @@ void game_update(float dt)
 {
     camera_update(&camera, dt);
 
-    // camera fly
-    if (main_state != EDITOR) {
-        camera.position[1] = 1.0f;
+    if (main_state == EDITOR) {
+	camera.can_fly = true;
+    } else {
+	camera.can_fly = false;
     }
 
     // Render
@@ -87,14 +88,10 @@ void game_key_down(char key)
         camera.move_right = true;
 	break;
     case 'q':
-	if (main_state == EDITOR) {
-	    camera.move_up = true;
-	}
+	camera.move_up = true;
 	break;
     case 'e':
-	if (main_state == EDITOR) {
-	    camera.move_down = true;
-	}
+	camera.move_down = true;
 	break;
     default:
         break;

@@ -18,6 +18,7 @@ typedef struct {
     float mouse_xrel;
     float mouse_yrel;
 
+    bool can_fly;
     bool move_front;
     bool move_back;
     bool move_left;
