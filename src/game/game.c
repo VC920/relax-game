@@ -7,6 +7,7 @@
 #include "renderer.h"
 #include "map.h"
 #include "camera.h"
+#include "light.h"
 
 typedef enum {
     NORMAL,
@@ -16,30 +17,36 @@ typedef enum {
 static Shader entity_shader;
 static Shader light_shader;
 static Entity *entities;
-static Entity light;
+static Light light;
+static Entity light_entity;
 static Camera camera;
 static game_state main_state; 
 
 void game_init()
 {
     // Init renderer
-    entity_shader = shader_load("assets/shader/light.vert", "assets/shader/light.frag");
-    light_shader = shader_load("assets/shader/light.vert", "assets/shader/sun.frag");
+    entity_shader = shader_load("assets/shader/material.vert", "assets/shader/material.frag");
+    light_shader = shader_load("assets/shader/material.vert", "assets/shader/sun.frag");
     renderer_init();
 
     // Init entities
-    // entities = map_load_entities("assets/light_test.map");
-    entities = map_load_entities("assets/main.map");
+    // entities = map_load_entities("assets/map/light_test.map");
+    entities = map_load_entities("assets/map/main.map");
 
-    Model cube_model = model_load("assets/model/cube.obj");
-    light = entity_init(&cube_model);
-    light.position[0] = 20;
-    light.position[1] = 20;
-    light.position[2] = 20;
-
-
+    // Init light
+    Model sphere_model = model_load("assets/model/sphere.obj");
+    light = light_init(20.0f, 20.0f, 0.0f);
+    light_set_ambient(&light, 0.2f, 0.2f, 0.2f);
+    light_set_diffuse(&light, 0.5f, 0.5f, 0.5f);
+    light_set_specular(&light, 1.0f, 1.0f, 1.0f);
+    
+    light_entity = entity_init(&sphere_model);
+    light_entity.position[0] = light.position[0];
+    light_entity.position[1] = light.position[1];
+    light_entity.position[2] = light.position[2];
+    
     // Init camera
-    vec3 cam_pos = { 0.0f, 1.0f, 0.0f };
+    vec3 cam_pos = { 0.0f, 1.0f, 10.0f };
     camera = camera_init(cam_pos, 5.0f, 0.05f);
 
     // Init mode
@@ -60,7 +67,8 @@ void game_update(float dt)
     for (int i = 0; i < arrlen(entities); i++) {
         renderer_render(&entity_shader, &light, &entities[i], &camera);
     }
-    renderer_render(&light_shader, &light, &light, &camera);
+
+    renderer_render(&light_shader, &light, &light_entity, &camera);
 }
 
 void game_key_down(char key)
@@ -77,6 +85,17 @@ void game_key_down(char key)
         break;
     case 'd':
         camera.move_right = true;
+	break;
+    case 'q':
+	if (main_state == EDITOR) {
+	    camera.move_up = true;
+	}
+	break;
+    case 'e':
+	if (main_state == EDITOR) {
+	    camera.move_down = true;
+	}
+	break;
     default:
         break;
     }
@@ -96,6 +115,13 @@ void game_key_up(char key)
         break;
     case 'd':
         camera.move_right = false;
+	break;
+    case 'q':
+	camera.move_up = false;
+	break;
+    case 'e':
+	camera.move_down = false;
+	break;
     default:
         break;
     }

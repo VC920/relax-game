@@ -3,7 +3,7 @@ a little pure c program 3d game
 
 ![demo1](./assets/texture/demo1.png)
 ![demo2](./assets/texture/demo2.png)
-![demo4](./assets/texture/demo4.png)
+![demo3](./assets/texture/demo3.png)
 ## Build
 make && make run
 

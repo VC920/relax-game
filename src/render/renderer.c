@@ -13,7 +13,7 @@ void renderer_init()
     glEnable(GL_CULL_FACE);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);  
-    // glClearColor(0.9, 0.9, 1.0, 1.0);
+    glClearColor(204.0 / 255.0, 1.0, 1.0, 1.0);
 }
 
 void renderer_clear()
@@ -43,7 +43,7 @@ void create_projection_mat(mat4 projection_mat, int window_width, int window_hei
     glm_perspective(glm_rad(45.0f), (float)window_width / (float)window_height, 0.1f, 100.0f, projection_mat);
 }
 
-void renderer_render(Shader *shader, Entity *light, Entity *entity, Camera *camera)
+void renderer_render(Shader *shader, Light *light, Entity *entity, Camera *camera)
 {
     glUseProgram(shader->program_id);
 
@@ -72,11 +72,18 @@ void renderer_render(Shader *shader, Entity *light, Entity *entity, Camera *came
     create_projection_mat(projection_mat, WINDOW_WIDTH, WINDOW_HEIGHT);
     glUniformMatrix4fv(glGetUniformLocation(shader->program_id, "projection_mat"), 1, GL_FALSE, (float*)projection_mat);
 
-    // Light
-    glUniform3f(glGetUniformLocation(shader->program_id, "object_color"), 1.0f, 0.5f, 0.31f);
-    glUniform3f(glGetUniformLocation(shader->program_id, "light_color"), 1.0f, 1.0f, 1.0f);
-    glUniform3f(glGetUniformLocation(shader->program_id, "light_pos"), light->position[0], light->position[1], light->position[2]);
-    glUniform3f(glGetUniformLocation(shader->program_id, "view_pos"), camera->position[0], camera->position[1], camera->position[2]);
+    // Material
+    glUniform3f(glGetUniformLocation(shader->program_id, "material.ambient"), 0.25f, 0.2f, 0.0f);
+    glUniform3f(glGetUniformLocation(shader->program_id, "material.diffuse"), 0.7f, 0.6f, 0.2f);
+    glUniform3f(glGetUniformLocation(shader->program_id, "material.specular"), 0.6f, 0.5f, 0.3f);
+    glUniform1f(glGetUniformLocation(shader->program_id, "material.shininess"), 0.4 * 128.0f);
+    
+    glUniform3fv(glGetUniformLocation(shader->program_id, "light.ambient"), 1, light->ambient);
+    glUniform3fv(glGetUniformLocation(shader->program_id, "light.diffuse"), 1, light->diffuse);
+    glUniform3fv(glGetUniformLocation(shader->program_id, "light.specular"), 1, light->specular);
+    glUniform3fv(glGetUniformLocation(shader->program_id, "light.position"), 1, light->position);
+    
+    glUniform3fv(glGetUniformLocation(shader->program_id, "view_pos"), 1, camera->position);
     
     // Model
     Model model = entity->model;

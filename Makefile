@@ -17,10 +17,10 @@ INCLUDES = \
 LIBS = -lSDL2 -lm
 
 all:
-	$(CC) $(CFLAGS) -o rg $(SRCS) $(INCLUDES) $(LIBS)
+	$(CC) $(CFLAGS) -o rr $(SRCS) $(INCLUDES) $(LIBS)
 
 run:
-	./rg
+	./rr
 
 clean:
-	rm -rf ./rg
+	rm -rf ./rr

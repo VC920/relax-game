@@ -39,7 +39,7 @@ int main()
     // Setting
     SDL_ShowCursor(SDL_DISABLE);
     SDL_SetRelativeMouseMode(SDL_TRUE);
-
+    SDL_GL_SetSwapInterval(1);
     // Setup
     game_init();
 
@@ -85,7 +85,7 @@ int main()
         Uint64 current_frame_time = SDL_GetPerformanceCounter();
         float delta_time = (float)(current_frame_time - last_frame_time) / frequency;
         last_frame_time = current_frame_time;
-        /* printf("Current FPS: %.f\n", 1 / delta_time); */
+        printf("Current FPS: %.f\n", 1 / delta_time);
 
         game_update(delta_time);
         

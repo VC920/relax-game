@@ -18,6 +18,8 @@ Camera camera_init(vec3 position, float speed, float sensitivity)
     camera.move_front = false;
     camera.move_left = false;
     camera.move_right = false;
+    camera.move_up = false;
+    camera.move_down = false;
     return camera;
 }
 

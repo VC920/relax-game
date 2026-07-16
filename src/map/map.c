@@ -19,7 +19,7 @@ Entity *map_load_entities(const char *path)
         char entity_name[256] = {0};
         char model_path[256] = {0};
         char texture_path[256] = {0};
-        sscanf(line, "%s%s%s %f/%f/%f %f/%f/%f %f",
+        sscanf(line, "%s%s%s [%f/%f/%f] [%f/%f/%f] [%f]",
             entity_name, model_path, texture_path,
             &entity.position[0], &entity.position[1], &entity.position[2],
             &entity.rotation[0], &entity.rotation[1], &entity.rotation[2],
