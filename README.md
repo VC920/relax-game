@@ -1,14 +1,10 @@
 # Relax Game
 a little pure c program 3d game
 
-1.base model  
 ![demo1](./assets/texture/demo/demo1.png)
 ![demo2](./assets/texture/demo/demo2.png)
-2.base light  
 ![demo3](./assets/texture/demo/demo3.png)
-3.light map  
 ![demo4](./assets/texture/demo/demo4.png)
-4.mulity light  
 ![demo5](./assets/texture/demo/demo5.png)
 
 ## Build
